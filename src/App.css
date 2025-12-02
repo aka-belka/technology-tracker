@@ -1,0 +1,57 @@
+/*==================================================== базовые стили для приложения ==============================================*/
+body {
+  background-color: #c6a8a8;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.App { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 20px; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
+      sans-serif; 
+  color: #333; 
+  background-color: #413535; 
+} 
+
+/*========================================== стили для заголовка приложения ===================================*/
+.App-header { 
+  background-color: #5d4e4e; 
+  padding: 20px; 
+  color: white; 
+  text-align: center; 
+  border-radius: 10px; 
+  margin-bottom: 20px; 
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} 
+.App-content {
+  padding: 20px;
+  background-color: #8f7a7a;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+.App-logo { 
+  height: 40px; 
+  pointer-events: none; 
+} 
+.App-link { 
+  color: #61dafb; 
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+} 
+.App-link:hover { 
+  color: #4fa3d1;
+  text-decoration: underline; 
+} 
+
+.tech{
+  background: white; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

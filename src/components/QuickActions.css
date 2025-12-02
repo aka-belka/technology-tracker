@@ -1,0 +1,81 @@
+.quick-actions {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.quick-actions-title{
+  text-align: center;
+}
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.action-btn:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.action-text {
+    flex: 1;
+}
+
+.mark-all-btn {
+    background: linear-gradient(135deg, #1ad597, #059669);
+    color: white;
+}
+
+.mark-all-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #f8524d, #d93706);
+    color: white;
+}
+
+.reset-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #b52119, #890909);
+}
+
+.random-btn {
+    background: linear-gradient(135deg, #f19346, #cb6c31);
+    color: white;
+}
+
+.random-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #c0723a, #b6661d);
+}
