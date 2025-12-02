@@ -1,6 +1,7 @@
 import './TechnologyCard.css' 
+import TechnologyNotes from './TechnologyNotes';
 
-function TechnologyCard({technologies, onUpdateStatus }) { 
+function TechnologyCard({technologies, onUpdateStatus, onUpdateNotes  }) { 
     const handleStatusChange = (id, direction) => {
         const tech = technologies.find(t => t.id === id);
         if (!tech) return;
@@ -31,6 +32,11 @@ function TechnologyCard({technologies, onUpdateStatus }) {
                             <h3>{technology.title}</h3> 
                             <p>{technology.description}</p>
                             <div className="technology-tag">{technology.category}</div>
+                            <TechnologyNotes 
+                                notes={technology.notes || ''}  
+                                onNotesChange={onUpdateNotes}   
+                                techId={technology.id}        
+                            />
                         </div> 
 
                         <div className="technology-buttons"> 
