@@ -79,3 +79,26 @@
 .random-btn:hover:not(:disabled) {
     background: linear-gradient(135deg, #c0723a, #b6661d);
 }
+
+
+
+.export-btn {
+  background: linear-gradient(135deg, #966767 0%, #822727 100%);
+  color: white;
+}
+
+.export-btn:hover {
+  background: linear-gradient(135deg, #966767 0%, #4e1919 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+}
+
+
+.export-success {
+  text-align: center;
+}
+
+.export-success p {
+  margin-bottom: 15px;
+  color: #333;
+}

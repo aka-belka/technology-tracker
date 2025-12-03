@@ -60,19 +60,6 @@ function ProgressHeader({technologies }) {
                 </div>
             </div>
 
-           <div className="progress-section">
-                <div className="progress-header">
-                    <span className="progress-label">Прогресс изучения</span>
-                    <span className="progress-percent">{progress}%</span>
-                </div>
-                
-                <div className="progress-track">
-                    <div 
-                        className="progress-fill"
-                        style={{ width: `${progress}%` }}
-                    ></div>
-                </div>
-            </div>
         </div> 
     ); 
 } 

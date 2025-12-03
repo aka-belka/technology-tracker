@@ -1,5 +1,10 @@
 import './QuickActions.css' 
+import { useState } from 'react';
+import Modal from './Modal';
+
 function QuickActions({ technologies, onUpdateAllStatus, onRandomSelect }) {
+    const [showExportModal, setShowExportModal] = useState(false);
+    const [exportData, setExportData] = useState('');
     const handleMarkAllCompleted = () => {
         if (technologies.length === 0) return;
         
@@ -36,6 +41,37 @@ function QuickActions({ technologies, onUpdateAllStatus, onRandomSelect }) {
         onRandomSelect(randomTech.id);
     };
     
+    const handleExport = () => {
+        if (technologies.length === 0) {
+            alert('Нет данных для экспорта!');
+            return;
+        }
+        
+        const data = {
+            exportedAt: new Date().toISOString(),
+            totalTechnologies: technologies.length,
+            completed: technologies.filter(t => t.status === 'completed').length,
+            technologies: technologies
+        };
+        
+        const dataStr = JSON.stringify(data, null, 2);
+        
+        setExportData(dataStr);
+        
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `tech-tracker-export-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        setShowExportModal(true);
+  };
+
+
     return (
         <div className="quick-actions">
             <h2 className="quick-actions-title"> Быстрые действия</h2>
@@ -61,8 +97,23 @@ function QuickActions({ technologies, onUpdateAllStatus, onRandomSelect }) {
                 >
                     <span className="action-text">Случайный выбор следующей технологии</span>
                 </button>
+
+                <button 
+                    onClick={handleExport}
+                    className="action-btn export-btn"
+                >
+                    <span className="action-text">Экспорт данных</span>
+                </button>
             </div>
-            
+             <Modal 
+                isOpen={showExportModal}
+                onClose={() => setShowExportModal(false)}
+                title="Экспорт данных завершен"
+            >
+                <div className="export-success">
+                <p>Данные успешно экспортированы!</p>
+                </div>
+            </Modal>
         </div>
     );
 }

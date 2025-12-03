@@ -4,32 +4,23 @@ import TechnologyCard from './components/TechnologyCard.jsx';
 import ProgressHeader from './components/ProgressHeader.jsx';
 import QuickActions from './components/QuickActions.jsx'; 
 import TechnologyFilters from './components/TechnologyFilters.jsx'; 
+import useTechnologies from './components/useTechnologies';
+import ProgressBar from './components/ProgressBar';
 
 function App() {
-  const [technologies, setTechnologies] = useState([ 
-    { id: 1, title: 'React Components', description: 'Изучение базовых компонентов', status: 'completed', category: 'Frontend', notes: '' }, 
-    { id: 2, title: 'JSX Syntax', description: 'Освоение синтаксиса JSX', status: 'in-progress', category: 'Frontend', notes: '' }, 
-    { id: 3, title: 'State Management', description: 'Работа с состоянием компонентов', status: 'not-started', category: 'Frontend', notes: ''},
-    { id: 4, title: 'Database Design', description: 'Проектирование баз данных', status: 'not-started', category: 'Database', notes: ''}
-  ]); 
+  const {
+    technologies,
+    updateStatus,
+    updateNotes,
+    updateAllStatuses,
+    highlightRandomTech,
+    progress
+  } = useTechnologies();
+  
   const [activeFilter, setActiveFilter] = useState('all');
-  const updateStatus = (id, newStatus) => {
-    setTechnologies(prev => prev.map(technology => 
-      technology.id === id ? { ...technology, status: newStatus } : technology
-    ));
-  };
-  
-  const updateAllStatuses = (updatedTechs) => {
-    setTechnologies(updatedTechs);
-  };
-  
-  const highlightRandomTech = (techId) => {
-    setTechnologies(prev => prev.map(tech => 
-      tech.id === techId ? { ...tech, status: 'in-progress' } : tech
-    ));
-  };
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const getFilteredTechnologies = () => {
+  const getFilteredByStatus = () => {
   switch(activeFilter) {
     case 'not-started':
       return technologies.filter(tech => tech.status === 'not-started');
@@ -42,44 +33,53 @@ function App() {
       return technologies;
   }
   };
-  
-  const filteredTechnologies = getFilteredTechnologies();
-  useEffect(() => { 
-    localStorage.setItem('techTrackerData', JSON.stringify(technologies)); 
-  console.log('Данные сохранены в localStorage'); 
-  }, [technologies]); 
 
-  useEffect(() => { 
-    const saved = localStorage.getItem('techTrackerData'); 
-    if (saved) { 
-        setTechnologies(JSON.parse(saved)); 
-    console.log('Данные загружены из localStorage'); 
-      } 
-  }, []); 
-
-   const updateTechnologyNotes = (techId, newNotes) => { 
-    setTechnologies(prevTech =>  
-      prevTech.map(tech =>  
-        tech.id === techId ? { ...tech, notes: newNotes } : tech 
-      ) 
-    ); 
+  const getSearchedTechnologies = (techList) => {
+    if (!searchQuery.trim()) return techList;
+    
+    const query = searchQuery.toLowerCase();
+    return techList.filter(tech => 
+      tech.title.toLowerCase().includes(query) || 
+      tech.description.toLowerCase().includes(query)
+    );
   };
+  
+  const statusFiltered = getFilteredByStatus();
+  const filteredTechnologies = getSearchedTechnologies(statusFiltered);
   return (
   <div className="App"> 
     <header className="App-header">
         <h1>Технологический Трекер</h1>
         <p>Отслеживание прогресса изучения технологий</p>
+
+        <ProgressBar 
+          progress={progress}
+          label="Общий прогресс" 
+          color = '#db9b66'
+        />
     </header>
     <main className="App-content">
         <div className="tech">
+
           <TechnologyFilters 
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter} 
           />
+
+          <div className="search-box"> 
+            <input 
+              type="text" 
+              placeholder="Поиск технологий..." 
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)} 
+            /> 
+            <span>Найдено: {filteredTechnologies.length}</span>
+          </div>
+
           <TechnologyCard 
               technologies={filteredTechnologies} 
               onUpdateStatus={updateStatus}
-              onUpdateNotes={updateTechnologyNotes}
+              onUpdateNotes={updateNotes}
           /> 
         </div>
          <QuickActions 

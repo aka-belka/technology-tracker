@@ -55,14 +55,14 @@
 
 .progress-track {
     height: 12px;
-    background: #9c9898;
+    background: #ffffff;
     border-radius: 6px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #333, #3a3a3a);
+    background: linear-gradient(90deg, #db9b66, #633116);
     border-radius: 6px;
     transition: width 0.6s ease;
     position: relative;
