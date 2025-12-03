@@ -5,7 +5,6 @@ import ProgressHeader from './components/ProgressHeader.jsx';
 import QuickActions from './components/QuickActions.jsx'; 
 import TechnologyFilters from './components/TechnologyFilters.jsx'; 
 import useTechnologies from './components/useTechnologies';
-import ProgressBar from './components/ProgressBar';
 
 function App() {
   const {
@@ -51,12 +50,6 @@ function App() {
     <header className="App-header">
         <h1>Технологический Трекер</h1>
         <p>Отслеживание прогресса изучения технологий</p>
-
-        <ProgressBar 
-          progress={progress}
-          label="Общий прогресс" 
-          color = '#db9b66'
-        />
     </header>
     <main className="App-content">
         <div className="tech">

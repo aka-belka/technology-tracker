@@ -1,4 +1,5 @@
 import './ProgressHeader.css' 
+import ProgressBar from './ProgressBar';
 function ProgressHeader({technologies }) { 
     const total = technologies.length;
     const completed = technologies.filter(technology => technology.status === 'completed').length;
@@ -59,6 +60,11 @@ function ProgressHeader({technologies }) {
                     <div className="stat-value">{popular_category.name}</div>
                 </div>
             </div>
+            <ProgressBar 
+                progress={progress}
+                label="Общий прогресс" 
+                color = '#db9b66'
+                />
 
         </div> 
     ); 
